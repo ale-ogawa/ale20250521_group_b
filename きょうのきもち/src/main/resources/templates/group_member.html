@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>グループ管理画面</title>
+</head>
+
+<body>
+	<h2><a th:href="@{/group}">グループ管理</a>>>メンバー移動</h2>
+	<form th:action="@{/group/member}" th:object="${groupForm}" method="post">
+		<div th:each="group : ${groups}">
+			<p>[[${group.name}]]</p>
+			<div th:each="account : ${accounts}">
+				<div th:if="${group.id == account.groupId}">
+					<input type="checkbox" th:field="*{accountIds}" th:value="${account.id}">
+					[[${account.nickname}]]
+				</div>
+			</div>
+		</div>
+		<label>移動先グループを選択：</label>
+		<select th:field="*{id}">
+			<option th:each="group : ${groups}" th:value="${group.id}">
+				[[${group.name}]]
+			</option>
+		</select>
+		<input type="submit" value="確定">
+	</form>
+</body>
+
+</html>

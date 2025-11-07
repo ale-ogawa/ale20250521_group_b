@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>ホーム</title>
+</head>
+
+<body>
+	<h2>ホーム画面</h2>
+	<p>今日の日付は [[${today}]] です。</p>
+	<p>気分：[[${post.feeling}]]</p>
+	<p>投稿：[[${post.text}]]</p>
+	<a th:href="@{/}">編集</a>
+	
+	
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>カレンダー</title>
+</head>
+
+<body>
+    <h2>カレンダー</h2>
+	<p>[[${nickname}]]さん</p>
+	<form th:action="@{/calendar}" th:object="${calendarForm}" method="get">
+	    年:
+	    <select th:field="*{year}">
+	        <option th:value="2023">2023年</option>
+	        <option th:value="2024">2024年</option>
+	        <option th:value="2025">2025年</option>
+	        <option th:value="2026">2026年</option>
+	    </select>
+
+	    月:
+	    <select th:field="*{month}">
+	        <option th:value="1">1月</option>
+	        <option th:value="2">2月</option>
+	        <option th:value="3">3月</option>
+	        <option th:value="4">4月</option>
+	        <option th:value="5">5月</option>
+	        <option th:value="6">6月</option>
+	        <option th:value="7">7月</option>
+	        <option th:value="8">8月</option>
+	        <option th:value="9">9月</option>
+	        <option th:value="10">10月</option>
+	        <option th:value="11">11月</option>
+	        <option th:value="12">12月</option>
+	    </select>
+
+	    <input type="submit" value="表示">
+	</form>
+
+    <div th:each="diary : ${diaries}">
+		<label>
+        	<span th:text="${diary.date} + ':'"></span>
+			<img th:src="${images[diary.feeling]}">
+			<br>
+		</label>
+    </div>
+
+</body>
+</html>

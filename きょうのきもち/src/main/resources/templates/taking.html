@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>服薬</title>
+</head>
+
+<body>
+	<h2>服薬</h2>
+		<form th:action="@{/medicine/taking}" th:object="${takingForm}" method="post">
+			<div th:each="medicine : ${medicines}">
+				<label>
+					<input type="checkbox" th:field="*{medicineIds}" th:value="${medicine.id}"/>
+			        <span th:text="${medicine.name} + ':' + ${medicine.effect}"></span>
+				</label><br>
+		    </div>
+			<p>直近の服薬</p>
+			<div th:each="takenMedicine : ${takenMedicines}">
+				<label>
+			        <span th:text="${takenMedicine.name} + ':' + ${takenMedicine.time}"></span>
+				</label><br>
+		    </div>
+			<input type="submit" value="服薬する">
+		</form>
+</body>
+
+</html>

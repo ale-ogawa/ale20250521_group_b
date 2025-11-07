@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.webapp.repository.GroupMapper">
+
+	<select id="selectAccounts"
+		resultType="com.example.webapp.entity.Account">
+		SELECT id, nickname, group_id
+		FROM accounts
+		WHERE follow_id = #{accountId}
+	</select>
+	
+	<select id="selectGroups"
+		resultType="com.example.webapp.entity.Group">
+		SELECT id, name, code
+		FROM groups
+		WHERE account_id = #{accountId}
+	</select>
+	
+	<insert id="insertGroup"
+		parameterType="com.example.webapp.entity.Group">
+		INSERT INTO groups (account_id, name, code)
+		VALUES
+		(#{accountId}, #{name}, #{code})
+	</insert>
+	
+	<delete id="delete">
+		DELETE FROM groups
+		WHERE id = #{id}
+	</delete>
+	
+	<update id="update"
+		parameterType="com.example.webapp.form.GroupForm">
+		UPDATE accounts
+	    SET group_id = #{id}
+	    WHERE id IN
+	    <foreach item="accountId" collection="accountIds" open="(" separator="," close=")">
+	        #{accountId}
+	    </foreach>
+	</update>
+	
+</mapper>

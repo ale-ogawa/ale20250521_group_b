@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>グループ管理画面</title>
+</head>
+
+<body>
+	<h2><a th:href="@{/group}">グループ管理</a>>>追加・削除</h2>
+	
+		<details>
+		<summary>新規グループ作成</summary>
+			<form th:action="@{/group/edit}" th:object="${groupForm}" method="post">
+				<input type="text" th:name="name" value="新規グループ">
+				<input type="submit" value="確定">
+			</form>
+		</details>
+		
+		<div th:each="group : ${groups}">
+			<p>
+				<form th:action="@{/group/edit}" method="post">
+					<input type="hidden" th:name="id" th:value="${group.id}">
+					<input type="submit" value="削除">[[${group.name}]]
+				</form>
+			</p>
+			<div th:each="account : ${accounts}">
+				<ul th:if="${group.id == account.groupId}">
+					<li th:text="${account.nickname}"></li>
+				</ul>
+			</div>
+		</div>
+		
+</body>
+
+</html>
