@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>問題ページ</title>
+    <style>
+        body { font-family: sans-serif; margin: 2em; }
+        .question-box { margin-bottom: 2em; }
+        .choice { margin: 0.5em 0; }
+        .error { color: red; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <h2 th:text="'第 ' + ${currentNo} + ' 問 / 全 ' + ${totalNo} + ' 問'">1問目</h2>
+
+    <div class="question-box">
+        <p th:text="${questionData.text}">ここに問題文が入ります</p>
+    </div>
+	<form th:action="@{/answer}" method="post">
+	  <input type="hidden" name="sessionId" th:value="${sessionId}" />
+
+	  <div th:each="choice : ${questionData.choices}">
+	    <label>
+	      <input type="radio" name="selectedChoiceId" th:value="${choice.id}" required />
+	      <span th:text="${choice.text}"></span>
+	    </label>
+	  </div>
+
+	  <button type="submit">回答する</button>
+	</form>
+</body>
+</html>

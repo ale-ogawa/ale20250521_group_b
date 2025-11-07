@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>CSV問題一括登録</title>
+    <style>
+        body { font-family: sans-serif; margin: 2em; }
+        .file-info { margin-top: 1em; color: #333; }
+        .message { margin-top: 1em; color: red; }
+    </style>
+</head>
+<body>
+    <h2>CSV問題一括登録</h2>
+
+    <form th:action="@{/plearning/csv}" method="post" enctype="multipart/form-data">
+        <div>
+            <label for="file">CSVファイルを選択：</label>
+            <input type="file" id="file" name="file" accept=".csv" onchange="showFileName()" required />
+        </div>
+
+        <div class="file-info" id="fileNameDisplay"></div>
+
+        <div style="margin-top: 1em;">
+            <button type="submit">登録</button>
+            <a th:href="@{/admin}">
+                <button type="button">戻る</button>
+            </a>
+        </div>
+    </form>
+
+    <div class="message" th:if="${errorMessage}" th:text="${errorMessage}"></div>
+    <div class="message" style="color: green;" th:if="${successMessage}" th:text="${successMessage}"></div>
+
+    <script>
+        function showFileName() {
+            const input = document.getElementById('file');
+            const display = document.getElementById('fileNameDisplay');
+            if (input.files.length > 0) {
+                display.textContent = "選択されたファイル: " + input.files[0].name;
+            } else {
+                display.textContent = "";
+            }
+        }
+    </script>
+</body>
+</html>

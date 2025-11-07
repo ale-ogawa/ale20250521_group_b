@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>メインページ</title>
+  <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+  <div class="container">
+    <h1>メインページ</h1>
+
+    <div class="button-group">
+      <button>ログアウト</button>
+      <button>苦手リスト</button>
+      <button>退会</button>
+    </div>
+	
+	<form th:action="@{/plearning/questions.html}" method="post">
+	<div class="select-box">
+	        <select>
+	          <option selected disabled>カテゴリー</option>
+	          <option value="java">Java</option>
+	          <option value="javascript">JavaScript</option>
+	          <option value="database">データベース</option>
+	          <option value="spring">SpringFramework</option>
+	        </select>
+
+	        <select>
+	          <option selected disabled>問題数</option>
+	          <option value="10">10問</option>
+	          <option value="20">20問</option>
+	          <option value="30">30問</option>
+	        </select>
+	      </div>
+		  
+	      <button type="submit" class="start-btn">テストスタート</button>
+		  </form>
+
+    <h2>直近の問題一覧</h2>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>カテゴリーID</th>
+            <th>問題文</th>
+            <th>解説</th>
+            <th>作成日時</th>
+            <th>更新日時</th>
+        </tr>
+        <tr th:each="q : ${histories}">
+            <td th:text="${q.id}"></td>
+            <td th:text="${q.category_id}"></td>
+            <td th:text="${q.question_text}"></td>
+            <td th:text="${q.explanation}"></td>
+            <td th:text="${q.created_at}"></td>
+            <td th:text="${q.updated_at}"></td>
+        </tr>
+    </table>
+
+<!--<h1>テスト履歴</h1>-->
+
+<!--    <div th:if="${histories != null}">-->
+<!--      <div th:each="q : ${histories}">-->
+<!--        <button type="button">-->
+<!--          <div th:text="${q.created_at != null ? #temporals.format(q.created_at, 'MM/dd') : '日付不明'}">10/22</div>-->
+<!--          <div th:text="${q.category_name != null ? q.category_name : 'カテゴリー不明'}">Java</div>-->
+<!--          <div th:text="${q.question_count != null ? q.question_count + '問' : '問題数不明'}">30問</div>-->
+<!--        </button>-->
+<!--      </div>-->
+<!--    </div>-->
+
+
+</body>
+</html>
+

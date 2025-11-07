@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>管理者画面</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h2>管理者画面</h2>
+
+    <form method="post" th:action="@{/admin}">
+        <ul>
+            <li th:each="q : ${questions}">
+                <input type="checkbox" name="questionIds" th:value="${q.id}" />
+                <span th:text="${q.content}"></span>
+            </li>
+        </ul>
+        <button type="submit">選択した問題を削除</button>
+    </form>
+	<form th:action="@{/mondaishinki}" method="get" style="display:inline;">
+	    <button type="submit">新規追加画面へ</button>
+	</form>
+<br>
+    <a th:href="@{/csv}">一括追加画面へ</a>
+	
+</body>
+</html>

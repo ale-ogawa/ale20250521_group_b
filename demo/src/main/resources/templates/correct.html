@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>正解・不正解</title></head>
+<body>
+    <h1 th:text="${correctChoice != null ? '正解！' : '不正解！'}"></h1>
+
+    <p th:text="${'問題: ' + questionData.text}"></p>
+    <p th:text="${'正解: ' + correctChoice}"></p>
+    <p th:text="${'解説: ' + questionData.explanation}"></p>
+
+    <p th:if="${countInfo != null}" th:text="${'進捗: ' + countInfo.current + '/' + countInfo.total}"></p>
+
+    <form th:action="@{/questions}" method="post">
+        <input type="hidden" name="sessionId" th:value="${sessionId}" />
+        <button type="submit">次の問題へ</button>
+    </form>
+</body>
+</html>
+
+
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head><title>正解・不正解</title></head>-->
+<!--<body>-->
+<!--    <h1 th:text="${correctChoice != null ? '正解！' : '不正解！'}"></h1>-->
+
+<!--    <p th:text="'問題: ' + ${questionData.text}"></p>-->
+<!--    <p th:text="'正解: ' + ${correctChoice}"></p>-->
+<!--    <p th:text="'解説: ' + ${questionData.explanation}"></p>-->
+
+<!--    <p th:if="${countInfo != null}" th:text="'進捗: ' + ${countInfo.current} + '/' + ${countInfo.total}"></p>-->
+
+<!--    <form th:action="@{/questions}" method="post">-->
+<!--        <input type="hidden" name="sessionId" th:value="${sessionId}" />-->
+<!--        <button type="submit">次の問題へ</button>-->
+<!--    </form>-->
+<!--</body>-->
+<!--</html>-->

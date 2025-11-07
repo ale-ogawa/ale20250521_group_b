@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>新規ユーザー登録</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2>新規ユーザー登録</h2>
+
+  <!-- エラーメッセージ表示 -->
+  <div th:if="${errorMessage}" class="error-message">
+    <p th:text="${errorMessage}"></p>
+  </div>
+
+  <!-- 登録フォーム -->
+  <form th:action="@{/plearning/accountmake/register}" method="post">
+    <label for="username">ユーザー名：</label><br>
+    <input type="text" id="username" name="username" required><br>
+
+    <label for="password">パスワード：</label><br>
+    <input type="password" id="password" name="password" required><br>
+
+    <button type="submit">登録</button>
+  </form>
+
+  <!-- ログイン画面に戻るリンク -->
+  <p><a th:href="@{/}">ログイン画面に戻る</a></p>
+</body>
+</html>
+
+
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--  <meta charset="UTF-8">-->
+<!--  <title>新規ユーザー登録</title>-->
+<!--  <link rel="stylesheet" href="style.css">-->
+<!--</head>-->
+<!--<body>-->
+<!--  <h2>新規ユーザー登録</h2>-->
+
+<!--   エラーメッセージ表示 -->
+<!--  <div th:if="${errorMessage}">-->
+<!--    <p style="color:red;" th:text="${errorMessage}"></p>-->
+<!--  </div>-->
+
+<!--   登録フォーム -->
+<!--  <form th:action="@{/plearning/accountmake/register}" method="post">-->
+<!--    <label for="username">ユーザー名：</label>-->
+<!--    <input type="text" id="username" name="username" required><br><br>-->
+
+<!--    <label for="password">パスワード：</label>-->
+<!--    <input type="password" id="password" name="password" required><br><br>-->
+
+<!--    <button type="submit">登録</button>-->
+<!--  </form>-->
+
+<!--   ログイン画面に戻るリンク -->
+<!--  <p><a th:href="@{/}">ログイン画面に戻る</a></p>-->
+<!--</body>-->
+<!--</html>-->

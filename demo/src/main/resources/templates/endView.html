@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>テスト終了</title>
+    <link rel="stylesheet" href="/css/end.css" />
+    <style>
+        .center {
+            text-align: center;
+            margin-top: 100px;
+        }
+        .loader {
+            margin: 30px auto;
+            width: 80px;
+            height: 80px;
+            border: 10px solid #f3f3f3;
+            border-top: 10px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0%   { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .hidden {
+            display: none;
+        }
+        .error-message {
+            color: red;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="center">
+        <h2>テストお疲れさまでした。</h2>
+
+        <!-- ✅ ローディングアイコン -->
+        <div id="loadingSection">
+            <div class="loader"></div>
+            <p>loading...</p>
+        </div>
+
+        <!-- ✅ 結果表示ボタン（初期は非表示） -->
+        <form th:action="@{/plearning/resultscreen}" method="get" id="resultForm" class="hidden">
+            <button type="submit">テスト結果を表示</button>
+        </form>
+
+        <!-- ✅ エラーメッセージ表示 -->
+        <div th:if="${errorMessage}" class="error-message">
+            <p th:text="${errorMessage}"></p>
+        </div>
+    </div>
+
+    <!-- ✅ JavaScriptで3秒後にボタン表示 -->
+    <script>
+        setTimeout(function () {
+            document.getElementById("loadingSection").style.display = "none";
+            document.getElementById("resultForm").classList.remove("hidden");
+        }, 3000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>テスト結果</title>
+    <link rel="stylesheet" href="/css/result.css" />
+    <style>
+        .error-message { color: red; margin-bottom: 20px; }
+        .question-block { border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; }
+        .actions { margin-top: 30px; }
+    </style>
+</head>
+<body>
+    <h1>テスト結果</h1>
+
+    <!-- ✅ エラーメッセージ表示 -->
+    <div th:if="${errorMessage}" class="error-message">
+        <p th:text="${errorMessage}"></p>
+    </div>
+
+    <!-- ✅ 正解数表示 -->
+    <p>正解数：<span th:text="${correctCount}"></span> / <span th:text="${totalCount}"></span></p>
+
+    <!-- ✅ 問題一覧表示 -->
+    <form th:action="@{/plearning/addWeakList}" method="post">
+        <div th:each="result : ${testResults}" class="question-block">
+            <h3>問題 <span th:text="${result.questionId}"></span></h3>
+            <p><strong>問題文：</strong> <span th:text="${result.questionText}"></span></p>
+            <p><strong>あなたの解答：</strong> <span th:text="${result.userAnswer}"></span></p>
+            <p><strong>正解：</strong> <span th:text="${result.correctAnswer}"></span></p>
+            <p><strong>解説：</strong> <span th:text="${result.explanation}"></span></p>
+
+            <!-- ✅ 苦手チェック -->
+            <label>
+                <input type="checkbox" name="weakQuestionIds" th:value="${result.questionId}" />
+                苦手リストに追加
+            </label>
+        </div>
+
+        <!-- ✅ 苦手リストへ追加ボタン -->
+        <div class="actions">
+            <button type="submit">苦手リストへ追加</button>
+        </div>
+    </form>
+
+    <!-- ✅ メイン画面へ戻るボタン -->
+    <form th:action="@{/main}" method="get" class="actions">
+        <button type="submit">メイン画面へ戻る</button>
+    </form>
+</body>
+</html>
